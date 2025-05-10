@@ -1,0 +1,616 @@
+/* إعادة تعيين الإعدادات الافتراضية */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    color: #333;
+}
+
+/* القائمة الجانبية */
+.sidebar {
+    width: 250px;
+    background: #0a0f1e;
+    color: white;
+    padding: 20px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.sidebar.active {
+    transform: translateX(-250px);
+}
+
+.profile {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.profile img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid #00aaff;
+    transition: transform 0.3s ease;
+}
+
+.profile img:hover {
+    transform: scale(1.1);
+}
+
+.profile h2 {
+    margin: 15px 0 10px;
+    font-size: 24px;
+    color: #00aaff;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.social-icons a {
+    color: white;
+    font-size: 20px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #00aaff;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    padding: 15px 10px;
+    transition: background 0.3s ease;
+}
+
+nav ul li:hover {
+    background: #1a1f2e;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+}
+
+nav ul li a i {
+    width: 20px;
+    text-align: center;
+}
+
+nav ul li a.active {
+    color: #00aaff;
+    font-weight: bold;
+}
+
+/* زر التبديل */
+.toggle-btn {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+    font-size: 24px;
+    color: #00aaff;
+    cursor: pointer;
+    z-index: 1000;
+    display: none;
+}
+
+/* المحتوى الرئيسي */
+.main-content {
+    margin-left: 250px; /* تعويض مساحة الشريط الجانبي */
+    padding: 15px;
+    min-height: 100vh;
+    transition: margin 0.3s ease;
+}
+
+.main-content.active {
+    margin-left: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+p {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+blockquote {
+    margin: 20px 0;
+    padding: 10px 20px;
+    background: #f4f4f4;
+    border-left: 5px solid #00aaff;
+    font-style: italic;
+    color: #555;
+}
+
+.details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.details > div {
+    flex: 1 1 calc(50% - 20px);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.details strong {
+    color: #2c3e50;
+}
+
+.details i {
+    color: #00aaff;
+    font-size: 20px;
+}
+
+/* تأثيرات تفاعلية */
+.hero {
+    animation: fadeIn 1.5s ease-in-out;
+
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* التصميم المتجاوب */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-250px);
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .toggle-btn {
+        display: block;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    .details > div {
+        flex: 1 1 100%;
+    }
+}
+
+/* تصميم القسم الرئيسي */
+.hero {
+    background-image: url(../imgs/٢٠٢٤٠٨١٧_١٠٠٥٢٥.jpg); /* استبدل بالمسار الفعلي للصورة */
+    background-size: cover;
+    background-position: end;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* تصميم قسم المهارات */
+.skills-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #007bff;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 8px;
+}
+
+.skills-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50%;
+    height: 4px;
+    background: linear-gradient(to right, #007bff, #0056b3);
+    border-radius: 4px;
+}
+
+/* تصميم الشريط */
+.progress {
+    height: 13px;
+    border-radius: 5px;
+}
+
+.progress-bar {
+    background-color: #007bff;
+    transition: width 0.4s ease;
+}
+
+.progress-bar:hover {
+    background-color: #0056b3;
+}
+
+/* قسم Education */
+#education {
+padding: 60px 0;
+background: #f9f9f9;
+}
+
+#education h1 {
+font-size: 36px;
+color: #2c3e50;
+text-align: center;
+margin-bottom: 20px;
+}
+
+#education p {
+font-size: 16px;
+color: #555;
+text-align: center;
+margin-bottom: 40px;
+}
+
+.education-grid {
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 30px;
+padding: 0 20px;
+}
+
+.education-item {
+background: white;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+display: flex;
+align-items: center;
+gap: 20px;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.education-item:hover {
+transform: translateY(-10px);
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.education-icon {
+font-size: 48px;
+color: #00aaff;
+flex-shrink: 0; /* منع الأيقونة من التقلص */
+}
+
+.education-content {
+flex: 1;
+}
+
+.education-item h3 {
+font-size: 24px;
+color: #2c3e50;
+margin-bottom: 10px;
+}
+
+.education-item h4 {
+font-size: 18px;
+color: #00aaff;
+margin-bottom: 10px;
+}
+
+.education-item p {
+font-size: 16px;
+color: #555;
+margin-bottom: 15px;
+}
+
+/* التصميم المتجاوب */
+@media (max-width: 768px) {
+#education h1 {
+font-size: 28px;
+}
+
+#education p {
+font-size: 14px;
+}
+
+.education-item {
+flex-direction: column;
+text-align: center;
+}
+
+.education-icon {
+margin-bottom: 15px;
+}
+
+.education-item h3 {
+font-size: 20px;
+}
+
+.education-item h4 {
+font-size: 16px;
+}
+
+.education-item p {
+font-size: 14px;
+}
+}
+/* ✅ Highlight the entire projects section */
+.projects-container {
+padding: 60px 20px;
+background: #f8f9fa; /* Light background for the entire section */
+border-radius: 12px;
+box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+text-align: center;
+}
+
+/* 🎯 Section title */
+.section-title {
+font-size: 2rem;
+margin-bottom: 30px;
+color: #004aad;
+font-weight: bold;
+}
+
+/* ✅ Projects grid layout */
+.projects {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 20px;
+}
+
+/* 🔹 Project item styling */
+.project-item {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+background: white;
+padding: 15px;
+border-radius: 8px;
+box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 🎨 Hover effect */
+.project-item:hover {
+transform: translateY(-5px);
+box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ✅ Project title with icon */
+.project-item h3 {
+display: flex;
+align-items: center;
+font-size: 1.3rem;
+color: #007bff;
+gap: 8px;
+}
+
+/* 🔹 Project icon */
+.project-icon {
+font-size: 1.5rem;
+color: #007bff;
+}
+
+/* 📝 Description with indentation */
+.project-item p {
+font-size: 1rem;
+color: #444;
+margin-left: 25px;
+margin-bottom: 10px;
+text-align: left;
+}
+
+/* 🔗 View Project button */
+.btn {
+display: inline-block;
+font-size: 1rem;
+color: #007bff;
+text-decoration: none;
+font-weight: bold;
+transition: color 0.3s ease;
+margin-left: 25px;
+}
+
+.btn:hover {
+color: #0056b3;
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 768px) {
+.projects {
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 2 projects per row */
+}
+}
+
+@media (max-width: 480px) {
+.projects {
+grid-template-columns: 1fr; /* 1 project per row */
+}
+
+.project-item p, .btn {
+margin-left: 15px;
+}
+}
+/* ✅ Highlight the entire contact section */
+.contact-container {
+padding: 60px 20px;
+background: #f8f9fa;
+border-radius: 12px;
+box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+text-align: center;
+}
+
+/* 🎯 Section title */
+.section-title {
+font-size: 2rem;
+margin-bottom: 20px;
+color: #004aad;
+font-weight: bold;
+}
+
+/* 🔹 Contact Information */
+.contact-info {
+display: flex;
+justify-content: center;
+gap: 30px;
+flex-wrap: wrap;
+margin-bottom: 30px;
+}
+
+.info-box {
+display: flex;
+align-items: center;
+gap: 10px;
+font-size: 1rem;
+padding: 10px 15px;
+border-radius: 8px;
+box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.info-box i {
+font-size: 1.5rem;
+color: #007bff;
+
+}
+
+/* 📝 Contact Form */
+.contact-form {
+max-width: 500px;
+margin: 0 auto;
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+
+/* 🖊️ Input fields */
+.input-group input, 
+.input-group textarea {
+width: 100%;
+padding: 12px;
+border: 1px solid #ccc;
+border-radius: 8px;
+font-size: 1rem;
+transition: border-color 0.3s ease;
+}
+
+.input-group input:focus, 
+.input-group textarea:focus {
+border-color: #007bff;
+outline: none;
+}
+
+/* 📩 Send button */
+.btn {
+padding: 12px;
+background: #007bff;
+color: white;
+border: none;
+border-radius: 8px;
+font-size: 1rem;
+cursor: pointer;
+transition: background 0.3s ease;
+}
+
+.btn:hover {
+background: #0056b3;
+}
+
+/* 🔗 Social Media Icons */
+.social-icons {
+margin-top: 20px;
+}
+
+.social-link {
+font-size: 1.5rem;
+margin: 0 10px;
+color: #007bff;
+transition: color 0.3s ease;
+}
+
+.social-link:hover {
+color: #0056b3;
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 768px) {
+.contact-info {
+flex-direction: column;
+align-items: center;
+gap: 15px;
+}
+
+.info-box {
+width: 100%;
+max-width: 300px;
+justify-content: center;
+}
+
+.contact-form {
+max-width: 100%;
+}
+}
+
