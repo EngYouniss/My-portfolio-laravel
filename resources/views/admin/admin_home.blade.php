@@ -24,11 +24,16 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>تسجيل
-                                    الخروج</a></li>
+                            <li><a class="dropdown-item" href="{{route('logout')}}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        <i class="fas fa-sign-out-alt me-2"></i>تسجيل
+                                    الخروج</a>
+                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form></li>
                         </ul>
                     </div>
-                    <a href="../index.html" target="_blank" class="btn btn-outline-light ms-2">
+                    <a href="{{route('client.home')}}" target="_blank" class="btn btn-outline-light ms-2">
                         <i class="fas fa-external-link-alt"></i>
                         <span class="d-none d-md-inline">عرض البورتفوليو</span>
                     </a>
@@ -109,7 +114,7 @@
                                     <div class="col me-2">
                                         <div class="text-xs fw-bold text-warning text-uppercase mb-1">
                                             الرسائل الجديدة</div>
-                                        <div class="h5 mb-0 fw-bold text-gray-800">3</div>
+                                        <div class="h5 mb-0 fw-bold text-gray-800">{{$allMessages->count()}}</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-envelope fa-2x text-gray-300"></i>
@@ -187,18 +192,20 @@
                                         </a>
                                     </div>
                                     <div class="col-md-6">
-                                        <a href="#messages-section" class="btn btn-outline-warning w-100 py-3"
-                                            data-section="messages">
-                                            <i class="fas fa-envelope fa-2x mb-2"></i><br>
-                                            عرض الرسائل
-                                        </a>
-                                    </div>
+    <button class="btn btn-outline-warning w-100 py-3" data-bs-toggle="modal" data-bs-target="#messagesModal">
+        <i class="fas fa-envelope fa-2x mb-2"></i><br>
+        عرض الرسائل
+    </button>
+</div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- part messages-->
+            @include('admin.partial.show_messages')
 
             <!-- About Section -->
             <div id="about-section" class="section-content">
@@ -260,7 +267,7 @@
                                         <input type="text" class="form-control" value="https://behance.net/username"
                                             name="behance">
                                     </div>
-                                    <button class="btn btn-primary w-100">حفظ التغييرات</button>
+                                    <button  class="btn btn-primary w-100">حفظ التغييرات</button>
                                 </div>
                             </div>
                     </div>

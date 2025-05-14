@@ -21,27 +21,38 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Auth::routes();
 
 
-Route::get('/',[ClientsHomeController::class,'index']);
-
-Route::get('/admin/home',[AdminHomeController::class,'index']);
-Route::post('/admin/store',[AdminHomeController::class,'store'])->name('admin.store');
-
-Route::put('/admin/edit',[AdminHomeController::class,'update'])->name('admin.update');
-
-Route::get('/admin/skills',[skillscontroller::class,'index'])->name('admin.skills');
-Route::post('/admin/skills',[skillscontroller::class,'create'])->name('admin.create');
-Route::get('/admin/skills/delete/{id}',[skillscontroller::class,'delete'])->name('admin.delete');
-Route::put('/admin/skills/edit/{id}',[skillscontroller::class,'update'])->name('admin.updateSkill');
-
-
-Route::post('/admin/projects',[ProjectsController::class,'create'])->name('admin.createProject');
-Route::get('/admin/projects/delete/{id}',[ProjectsController::class,'delete'])->name('admin.deleteProject');
-Route::put('/admin/projects/edit/{id}',[ProjectsController::class,'update'])->name('admin.updateProject');
-
-Route::put('admin/saveImage',[AdminHomeController::class,'saveImage'])->name('admin.saveImage');
-
-Route::post('admin/education',[EducationController::class,'create'])->name('admin.createEducation');
-
+Route::get('/',[ClientsHomeController::class,'index'])->name('client.home');
 Route::post('client/message',[MessagesController::class,'create'])->name('client.message');
+
+
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+
+Route::get('/home',[AdminHomeController::class,'index']);
+Route::post('/store',[AdminHomeController::class,'store'])->name('admin.store');
+
+Route::put('/edit',[AdminHomeController::class,'update'])->name('admin.update');
+
+Route::get('/skills',[skillscontroller::class,'index'])->name('admin.skills');
+Route::post('/skills/create',[skillscontroller::class,'create'])->name('admin.create');
+Route::get('/skills/delete/{id}',[skillscontroller::class,'delete'])->name('admin.delete');
+Route::put('/skills/edit/{id}',[skillscontroller::class,'update'])->name('admin.updateSkill');
+
+
+Route::post('/projects',[ProjectsController::class,'create'])->name('admin.createProject');
+Route::get('/projects/delete/{id}',[ProjectsController::class,'delete'])->name('admin.deleteProject');
+Route::put('/projects/edit/{id}',[ProjectsController::class,'update'])->name('admin.updateProject');
+
+Route::put('/saveImage',[AdminHomeController::class,'saveImage'])->name('admin.saveImage');
+
+Route::post('/education',[EducationController::class,'create'])->name('admin.createEducation');
+
+
+
+});
+
+
+
+Route::get('/homep', [homeController::class, 'index'])->name('home');

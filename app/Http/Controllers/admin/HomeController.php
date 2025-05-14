@@ -17,7 +17,8 @@ class HomeController extends Controller
         $projectsInfo=Projects::get();
         $personalInfo = PersonalInformation::latest()->first();
         $educationInfo = Education::get();
-        $messageInfo = Messages::latest()->limit(5)->get();
+        $allMessages = Messages::get();
+        $messageInfo = Messages::latest()->limit(3)->get();
 
         return view('admin.admin_home')->with([
             'skills' => $skills,
@@ -25,6 +26,7 @@ class HomeController extends Controller
             'projectsInfo' => $projectsInfo,
             'educationInformation' => $educationInfo,
             'messageInfo' => $messageInfo,
+            'allMessages' => $allMessages,
         ]);
     }
 

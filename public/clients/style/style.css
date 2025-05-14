@@ -547,7 +547,7 @@ gap: 15px;
 }
 
 /* 🖊️ Input fields */
-.input-group input, 
+.input-group input,
 .input-group textarea {
 width: 100%;
 padding: 12px;
@@ -557,7 +557,7 @@ font-size: 1rem;
 transition: border-color 0.3s ease;
 }
 
-.input-group input:focus, 
+.input-group input:focus,
 .input-group textarea:focus {
 border-color: #007bff;
 outline: none;
