@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,17 +9,21 @@
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        /* Sidebar Styling */
+
+
+        /* تنسيقات السايدبار الجديدة مع LTR داخلي */
         #sidebar {
             background-color: #343a40;
             color: #fff;
             height: 100vh;
-            width: 250px;
+            width: 185px; /* عرض السايدبار */
             position: fixed;
             top: 0;
-            left: 0;
+            left: 0; /* ثابت على اليسار */
             z-index: 1000;
-            transform: translateX(0); /* إظهار الشريط الجانبي على الشاشات الكبيرة */
+            transition: all 0.3s;
+            direction: ltr; /* محتوى داخلي LTR */
+            text-align: left; /* محاذاة النصوص لليسار */
         }
 
         #sidebar .sidebar-header {
@@ -28,15 +32,10 @@
             text-align: center;
         }
 
-        #sidebar .sidebar-header h3 {
-            margin: 0;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
         #sidebar .components {
             list-style: none;
-            padding-left: 0;
+            padding: 0;
+            margin: 0;
         }
 
         #sidebar .components li {
@@ -59,7 +58,8 @@
         }
 
         #sidebar .components li a .fas {
-            margin-right: 10px;
+            margin-right: 10px; /* الأيقونات على اليسار */
+            margin-left: 0;
             font-size: 18px;
         }
 
@@ -68,102 +68,146 @@
             color: #fff;
         }
 
-        #sidebar .components li a.active:hover {
-            background-color: #0056b3;
-        }
-
-        /* Badge Styling */
-        .badge.bg-danger {
+        #sidebar .badge.bg-danger {
             background-color: #dc3545;
+            margin-left: 10px; /* تعديل موقع العلامة */
+            margin-right: 0;
         }
 
-        /* Adjusting content to not overlap with the sidebar on large screens */
+        /* تعديلات المحتوى الرئيسي */
         body {
-            margin-left: 250px;
-            transition: margin-left 0.3s ease;
+            margin-left: 183px; /* تعديل الهامش ليتناسب مع السايدبار اليساري */
+            transition: margin-left 0.3s;
+                        direction: ltr; /* بقية الصفحة RTL */
+
         }
 
+        /* زر التبديل للجوال */
         #toggle-sidebar {
-            display: none; /* تأكد من إخفاء زر التبديل */
+            display: none;
+            position: fixed;
+            top: 10px;
+            left: 10px; /* تعديل الموقع ليكون على اليسار */
+            z-index: 1100;
         }
 
-        /* Media query for screens smaller than or equal to 768px */
+        /* تجاوب مع الشاشات الصغيرة */
         @media (max-width: 768px) {
             #sidebar {
-                display: none; /* إخفاء الشريط الجانبي على الشاشات الصغيرة */
+                left: -250px; /* إخفاء السايدبار خارج الشاشة على اليسار */
+            }
+
+            #sidebar.active {
+                left: 0; /* إظهار السايدبار عند التفعيل */
             }
 
             body {
-                margin-left: 0; /* إزالة الهامش على الشاشات الصغيرة */
+                margin-left: 0;
+            }
+
+            #toggle-sidebar {
+                display: block;
             }
         }
     </style>
 </head>
 <body class="admin-dashboard">
+    <!-- زر التبديل للجوال -->
+    <button id="toggle-sidebar" class="btn btn-dark">
+        <i class="fas fa-bars"></i>
+    </button>
+
     <div class="wrapper">
+        <!-- السايدبار مع محتوى إنجليزي LTR -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3><i class="fas fa-user-shield"></i> لوحة التحكم</h3>
+                <h3><i class="fas fa-user-shield"></i> Dashboard</h3>
             </div>
 
             <ul class="list-unstyled components">
                 <li>
                     <a href="#dashboard-section" class="active" data-section="dashboard">
                         <i class="fas fa-tachometer-alt"></i>
-                        <span>الإحصائيات</span>
+                        <span>Dashboard</span>
                     </a>
                 </li>
                 <li>
                     <a href="#about-section" data-section="about">
                         <i class="fas fa-user-edit"></i>
-                        <span>إدارة الملف الشخصي</span>
+                        <span>Profile</span>
                     </a>
                 </li>
                 <li>
                     <a href="#skills-section" data-section="skills">
                         <i class="fas fa-cogs"></i>
-                        <span>إدارة المهارات</span>
+                        <span>Skills</span>
                     </a>
                 </li>
                 <li>
                     <a href="#projects-section" data-section="projects">
                         <i class="fas fa-project-diagram"></i>
-                        <span>إدارة المشاريع</span>
+                        <span>Projects</span>
                     </a>
                 </li>
                 <li>
                     <a href="#education-section" data-section="education">
                         <i class="fas fa-graduation-cap"></i>
-                        <span>إدارة التعليم</span>
+                        <span>Education</span>
                     </a>
                 </li>
                 <li>
                     <a href="#messages-section" data-section="messages" data-bs-toggle="modal" data-bs-target="#messagesModal">
                         <i class="fas fa-envelope"></i>
-                        <span>رسائل الزوار</span>
-                        <span class="badge bg-danger float-start">{{$allMessages->count()}}</span>
+                        <span>Messages</span>
+                        <span class="badge bg-danger">{{$allMessages->count()}}</span>
                     </a>
                 </li>
                 <li>
                     <a href="#settings-section" data-section="settings">
                         <i class="fas fa-cog"></i>
-                        <span>الإعدادات</span>
+                        <span>Settings</span>
                     </a>
                 </li>
             </ul>
         </nav>
 
+        <!-- المحتوى الرئيسي يبقى كما هو -->
         <div id="content">
             @yield('content')
 
-            <footer class="text-center text-lg-start bg-light text-muted">
+
+        </div>
+    </div>
+<footer class="text-center text-lg-start bg-light text-muted">
                 <div class="text-center p-3">
                     <p>&copy; 2025 جميع الحقوق محفوظة.</p>
                 </div>
             </footer>
-        </div>
+    <script>
+        // سكريبت تبديل السايدبار للجوال
+        document.getElementById('toggle-sidebar').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('active');
 
-    </div>
+            // إضافة/إزالة منع التمرير عند فتح السايدبار
+            if (document.getElementById('sidebar').classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        });
 
-    </body>
+        // إغلاق السايدبار عند النقر خارجها (للجوال)
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const toggleBtn = document.getElementById('toggle-sidebar');
+
+            if (window.innerWidth <= 768 &&
+                !sidebar.contains(event.target) &&
+                !toggleBtn.contains(event.target)) {
+                sidebar.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+</body>
 </html>

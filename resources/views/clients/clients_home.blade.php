@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- عدل meta tag في الـ head -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Portfolio - Younis Tallan</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -45,11 +46,21 @@
     </div>
 
     <!-- المحتوى الرئيسي -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1 style="font-weight: bold;">Hi, I'm Younis Tallan</h1>
-            <p> I'm a passionate Full Stack Developer dedicated to building seamless and dynamic digital experiences.</p>        </div>
-    </section>
+  <!-- Hero Section -->
+<section class="hero" id="home" style="margin-left: 260px;">
+  <div class="hero-text">
+    <h1><span class="typewriter" id="typewriter-text"></span></h1>
+    <p>Passionate about crafting modern web & mobile apps with clean, scalable code.</p>
+    <a href="#contact">Contact Me</a>
+  </div>
+
+  <div class="hero-image">
+    <img src="{{asset('clients/imgs/يونس.jpg')}}" alt="Younis Tallan">
+  </div>
+</section>
+
+
+
     <div class="main-content">
 
         <div class="container" id="about">
@@ -110,11 +121,10 @@
 
             <p>My goal is to contribute to impactful projects that combine technology and innovation. I enjoy working on challenging problems, optimizing user experiences, and delivering high-quality digital products. Whether collaborating in a team or working independently, I am committed to continuous learning and professional growth.</p>
         </div>
+        <hr style="height: 20px;">
         <!-- قسم المهارات -->
         <h2 class="skills-title text-left" id="skills">Skills</h2>
-
         <div id="skills" class="container my-5" id="skills">
-            <h2 class="text-center">Skills</h2>
             <div class="row">
                @foreach ($skills as $skill)
                <div class="col-md-6 mb-4">
@@ -127,63 +137,6 @@
                @endforeach
 
 
-                {{-- <div class="col-md-6 mb-4">
-                    <h5>JavaScript</h5>
-                    <div class="progress" data-toggle="tooltip" title="60%">
-                        <div class="progress-bar" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">60%</div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <h5>PHP</h5>
-                    <div class="progress" data-toggle="tooltip" title="80%">
-                        <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <h5>Laravel</h5>
-                    <div class="progress" data-toggle="tooltip" title="85%">
-                        <div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <h5>Flutter</h5>
-                    <div class="progress" data-toggle="tooltip" title="70%">
-                        <div class="progress-bar" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 mb-4">
-                    <h5>C#</h5>
-                    <div class="progress" data-toggle="tooltip" title="80%">
-                        <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 mb-4">
-                    <h5>Data Analysis</h5>
-                    <div class="progress" data-toggle="tooltip" title="80%">
-                        <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <h5>Data Structure & Algorithm </h5>
-                    <div class="progress" data-toggle="tooltip" title="90%">
-                        <div class="progress-bar" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 mb-4">
-                    <h5>MySQL & SQLServer & Oracle</h5>
-                    <div class="progress" data-toggle="tooltip" title="85%">
-                        <div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <h5>Git & GitHub</h5>
-                    <div class="progress" data-toggle="tooltip" title="65%">
-                        <div class="progress-bar" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
-                    </div>
-                </div> --}}
             </div>
         </div>
 
@@ -264,46 +217,7 @@
 
             @endforeach
 
-            {{-- <div class="project-item">
-                <h3><i class="fas fa-shopping-cart project-icon"></i> Online Watch Store</h3>
-                <p>An e-commerce website built with PHP that allows users to browse and purchase high-quality watches online.</p>
-                <p><strong>Technologies:</strong> PHP, MySQL, CSS</p>
-                <li><strong>Features:</strong> Product listing, shopping cart, secure checkout, admin dashboard.</li>
 
-                <a href="https://github.com/EngYouniss/watches-world-project.git" class="btn" target="_blank">🔗 View Project</a>
-            </div>
-            <div class="project-item">
-                <h3><i class="fas fa-newspaper project-icon"></i> News Blog Website</h3>
-                <p>A dynamic blog platform built with Laravel, featuring categorized news, user authentication, and multilingual support.</p>
-                <p><strong>Technologies:</strong> Laravel, MySQL, Bootstrap</p>
-                <li><strong>Features:</strong> Article management, user authentication, translation system.</li>
-
-                <a href="https://github.com/EngYouniss/blogs-website-project.git" class="btn" target="_blank">🔗 View Project</a>
-            </div>
-            <div class="project-item">
-                <h3><i class="fas fa-mobile-alt project-icon"></i> Lost & Found App</h3>
-                <p>A Flutter-based mobile app that helps users report and find lost items efficiently.</p>
-                <p><strong>Technologies:</strong> Flutter, Firebase</p>
-                <li><strong>Features:</strong> Lost item search, user reports, contact system.</li>
-
-                <a href="https://github.com/EngYouniss/lost-found-app-project.git" class="btn" target="_blank">🔗 View Project</a>
-            </div>
-            <div class="project-item">
-                <h3><i class="fas fa-calculator project-icon"></i> Accounting System</h3>
-                <p>A complete accounting system developed using C# Windows Forms, designed to manage financial records, generate invoices, and track expenses.</p>
-                <p><strong>Technologies:</strong> C#, .NET Framework, SQL Server</p>
-                <li><strong>Features:</strong> Invoice generation, expense tracking, reporting system.</li>
-
-                <a href="#" class="btn" target="_blank">🔗 View Project</a>
-            </div>
-
-            <div class="project-item">
-                <h3><i class="fas fa-music project-icon"></i> Music Player App</h3>
-                <p>A simple and lightweight music player app built with Flutter, allowing users to play locally stored audio files.</p>
-                <p><strong>Technologies:</strong> Flutter, Assets Audio Player</p>
-                <li><strong>Features:</strong> Custom UI, media controls, playlist support.</li>
-                <a href="https://github.com/EngYouniss/music-app-project.git" class="btn" target="_blank">🔗 View Project</a>
-            </div> --}}
         </div>
     </section>
 
@@ -361,6 +275,39 @@
 </section>
 
     </div>
+<!-- Typewriter Effect Script -->
+<script>
+  const texts = ["I'm Younis Tallan", "PHP Laravel Develper", "Full Stack Developer", "Flutter Developer"];
+  let count = 0;
+  let index = 0;
+  let currentText = '';
+  let letter = '';
+  let isDeleting = false;
+
+  function type() {
+    currentText = texts[count];
+    if (isDeleting) {
+      letter = currentText.slice(0, --index);
+    } else {
+      letter = currentText.slice(0, ++index);
+    }
+
+    document.getElementById('typewriter-text').textContent = letter;
+
+    if (!isDeleting && index === currentText.length) {
+      isDeleting = true;
+      setTimeout(type, 1000);
+    } else if (isDeleting && index === 0) {
+      isDeleting = false;
+      count = (count + 1) % texts.length;
+      setTimeout(type, 500);
+    } else {
+      setTimeout(type, isDeleting ? 50 : 100);
+    }
+  }
+
+  type();
+</script>
 
   <script src="{{asset('clients/js/script.js')}}"></script>
 </body>

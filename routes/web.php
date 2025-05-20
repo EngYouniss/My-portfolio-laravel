@@ -38,16 +38,18 @@ Route::put('/edit',[AdminHomeController::class,'update'])->name('admin.update');
 Route::get('/skills',[skillscontroller::class,'index'])->name('admin.skills');
 Route::post('/skills/create',[skillscontroller::class,'create'])->name('admin.create');
 Route::get('/skills/delete/{id}',[skillscontroller::class,'delete'])->name('admin.delete');
-Route::put('/skills/edit/{id}',[skillscontroller::class,'update'])->name('admin.updateSkill');
+Route::put('/skills/update/{id}',[skillscontroller::class,'update'])->name('admin.updateSkill');
 
 
 Route::post('/projects',[ProjectsController::class,'create'])->name('admin.createProject');
 Route::get('/projects/delete/{id}',[ProjectsController::class,'delete'])->name('admin.deleteProject');
-Route::put('/projects/edit/{id}',[ProjectsController::class,'update'])->name('admin.updateProject');
+Route::put('/projects/update/{id}',[ProjectsController::class,'update'])->name('admin.updateProject');
 
 Route::put('/saveImage',[AdminHomeController::class,'saveImage'])->name('admin.saveImage');
 
 Route::post('/education',[EducationController::class,'create'])->name('admin.createEducation');
+Route::get('/education/delete/{id}',[EducationController::class,'delete'])->name('admin.deleteEducation');
+Route::put('/education/update/{id}',[EducationController::class,'update'])->name('admin.updateEducation');
 
 
 

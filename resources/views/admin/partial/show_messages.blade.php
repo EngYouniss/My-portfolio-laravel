@@ -1,37 +1,84 @@
-<div class="modal fade" id="messagesModal" tabindex="-1" aria-labelledby="messagesModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-scrollable modal-dialog-centered">
-    <div class="modal-content shadow-lg rounded-4">
-      <div class="modal-header bg-warning text-white rounded-top-4">
-        <h5 class="modal-title fw-bold" id="messagesModalLabel">
-          <i class="fas fa-envelope-open-text me-2"></i> جميع الرسائل
-        </h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="إغلاق"></button>
+<!-- Modal -->
+<div class="modal fade" id="messagesModal" tabindex="-1" aria-labelledby="messagesModalLabel" aria-hidden="true" dir="ltr">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content border-0 overflow-hidden rounded-3">
+
+      <!-- Header -->
+      <div class="modal-header bg-primary text-white py-3 d-flex justify-content-between align-items-center">
+        <h5 class="modal-title fw-bold fs-4 mb-0" id="messagesModalLabel">Inbox</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body bg-light">
-        <!-- رسائل -->
+
+      <!-- Body with messages as cards in 3 columns -->
+      <div class="modal-body p-3">
         <div class="row g-3">
-          <!-- رسالة 1 -->
           @foreach($allMessages as $message)
-<div class="col-md-6">
-            <div class="card border-start border-5 border-primary shadow-sm h-100">
-              <div class="card-body">
-                <h6 class="card-title fw-bold text-primary">
-                  <i class="fas fa-user-circle me-2"></i> {{ $message->name }}
-                </h6>
-                <p class="card-text">{{$message->message}}</p>
-                <span class="badge bg-primary">جديدة</span>
+          <div class="col-md-4">
+            <div class="card shadow-sm h-100 border rounded-3">
+              <div class="card-body d-flex flex-column small-message-card">
+                <!-- Sender Info -->
+                <div class="mb-2">
+                  <h6 class="card-title mb-0 fw-semibold text-dark">{{ $message->name }}</h6>
+                  <small class="text-muted">{{ $message->email }}</small>
+                </div>
+
+                <!-- Message Content -->
+                <div class="flex-grow-1 overflow-auto message-box">
+                  <p class="card-text">{{ $message->message }}</p>
+                </div>
+
+                <!-- Delete Button -->
+                <div class="mt-3 text-end">
+                  <form method="POST" action="{">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i> Delete</button>
+                  </form>
+                </div>
               </div>
-              <div class="card-footer bg-transparent small text-muted text-end">
-{{$message->created_at->format('Y-M-d')}}              </div>
             </div>
           </div>
-@endforeach
-
+          @endforeach
         </div>
       </div>
-      <div class="modal-footer bg-light rounded-bottom-4">
-        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">إغلاق</button>
+
+      <!-- Footer -->
+      <div class="modal-footer bg-light d-flex justify-content-between align-items-center">
+        <div>
+          <span class="badge bg-primary rounded-pill">{{ $allMessages->count() }}</span>
+          <span class="ms-1">Total Messages</span>
+        </div>
+        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
+          Close
+        </button>
       </div>
+
     </div>
   </div>
 </div>
+
+<!-- Styles -->
+<style>
+  .small-message-card {
+    font-size: 0.9rem;
+  }
+
+  .message-box {
+    max-height: 100px;
+    overflow-y: auto;
+    padding-right: 2px;
+  }
+
+  .message-box::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .message-box::-webkit-scrollbar-thumb {
+    background-color: #c4c4c4;
+    border-radius: 4px;
+  }
+
+  .message-box::-webkit-scrollbar-track {
+    background: transparent;
+  }
+</style>
