@@ -12,9 +12,10 @@ use App\Models\Skills;
 
 class HomeController extends Controller
 {
-    public function index(){
-        $skills=Skills::get();
-        $projectsInfo=Projects::get();
+    public function index()
+    {
+        $skills = Skills::get();
+        $projectsInfo = Projects::get();
         $personalInfo = PersonalInformation::latest()->first();
         $educationInfo = Education::get();
         $allMessages = Messages::get();
@@ -30,13 +31,15 @@ class HomeController extends Controller
         ]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
             'fullName' => 'required',
-        ],['fullName.required' => 'الاسم الكامل مطلوب'
+        ], [
+            'fullName.required' => 'الاسم الكامل مطلوب'
 
-    ]);
-        $personalInfo=new PersonalInformation();
+        ]);
+        $personalInfo = new PersonalInformation();
         $personalInfo->name = $request->fullName;
         $personalInfo->age = $request->age;
         $personalInfo->birthdate = $request->birthDate;
@@ -45,59 +48,69 @@ class HomeController extends Controller
         $personalInfo->address = $request->address;
         $personalInfo->city = $request->city;
         $personalInfo->country = $request->contry;
-        $personalInfo->image = $this->UploadImage($request->file('image'));
+if ($request->hasFile('image')) {
+    $personalInfo->image = $this->UploadImage($request->file('image'));
+}
+
         $personalInfo->about_me = $request->aboutMe;
         $personalInfo->job_title = $request->jobTitle;
-        $personalInfo->cv = $request->cv;
+
+        // التعامل مع رفع السيرة الذاتية
+        if ($request->hasFile('cv')) {
+            $cvPath = $request->file('cv')->store('cv_files');
+            $personalInfo->cv = $cvPath;
+        }
         $personalInfo->x_url = $request->x;
         $personalInfo->github_url = $request->github;
         $personalInfo->linkedin = $request->linkedin;
-        if($personalInfo->save())
-        {
+        if ($personalInfo->save()) {
             return back()->with('success', 'Personal information saved successfully.');
-        }
-        else
-            {
+        } else {
             return back()->with('error', 'Failed to save personal information.');
-            }
+        }
+    }
 
-            }
+    public function UploadImage($image)
+    {
+        $imageName = time() . '.' . $image->extension();
+        $image->move(public_path('/images'), $imageName);
+        return $imageName;
+    }
+    public function UploadCV($cv)
+    {
+        $cvName = uniqid() . '.' . $cv->getClientOriginalExtension();
+        $cv->storeAs('cv_files', $cvName); // يخزن داخل storage/app/cv_files
+        return 'cv_files/' . $cvName;
+    }
 
-            public function UploadImage($image)
-            {
-                $imageName = time() . '.' . $image->extension();
-                $image->move(public_path('/images'), $imageName);
-                return $imageName;
-
-            }
 
 
-            public function update(Request $request)
+   public function update(Request $request)
 {
     // جلب أول سجل من الجدول
     $personalInfo = PersonalInformation::latest()->first();
 
     if (!$personalInfo) {
-        return back()->with('error', 'لا يوجد سجل لتحديثه.');
+        return back()->with('error', 'No record found to update.');
     }
 
     // التحقق من صحة البيانات المدخلة
     $validated = $request->validate([
-        'fullName'   => 'required|string|max:255',
-        'jobTitle'   => 'nullable|string|max:255',
-        'email'      => 'required|email|max:255',
-        'phoneNumber'=> 'nullable|string|max:20',
-        'address'    => 'nullable|string|max:255',
-        'city'       => 'nullable|string|max:100',
-        'country'    => 'nullable|string|max:100',
-        'age'        => 'nullable|integer|min:0',
-        'birthDate'  => 'nullable|date',
-        'aboutMe'    => 'nullable|string',
-        'x'          => 'nullable|string|max:255',
-        'github'     => 'nullable|string|max:255',
-        'linkedin'   => 'nullable|string|max:255',
-        'cv'         => 'nullable|file|mimes:pdf,doc,docx|max:10240', // max 10MB
-        'image'      => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // max 2MB
+        'fullName'    => 'required|string|max:255',
+        'jobTitle'    => 'nullable|string|max:255',
+        'email'       => 'required|email|max:255',
+        'phoneNumber' => 'nullable|string|max:20',
+        'address'     => 'nullable|string|max:255',
+        'city'        => 'nullable|string|max:100',
+        'country'     => 'nullable|string|max:100',
+        'age'         => 'nullable|integer|min:0',
+        'birthDate'   => 'nullable|date',
+        'aboutMe'     => 'nullable|string',
+        'x'           => 'nullable|string|max:255',
+        'github'      => 'nullable|string|max:255',
+        'linkedin'    => 'nullable|string|max:255',
+        'cv'          => 'nullable|file|mimes:pdf,doc,docx|max:10240', // max 10MB
+        'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // max 2MB
     ]);
 
     // إذا تم رفع صورة جديدة، قم بمعالجتها
@@ -106,36 +119,32 @@ class HomeController extends Controller
         $personalInfo->image = $imageName;
     }
 
-    // تحديث البيانات في السجل
-    $personalInfo->update([
-        'name'        => $validated['fullName'],
-        'job_title'   => $validated['jobTitle'],
-        'email'       => $validated['email'],
-        'phone_number'=> $validated['phoneNumber'],
-        'address'     => $validated['address'],
-        'city'        => $validated['city'],
-        'country'     => $validated['country'],
-        'age'         => $validated['age'],
-        'birthdate'   => $validated['birthDate'],
-        'about_me'    => $validated['aboutMe'],
-        'x_url'       => $validated['x'],
-        'github_url'  => $validated['github'],
-        'linkedin'    => $validated['linkedin'],
-        // الصورة فقط إذا تم رفعها
-        'image'       => $personalInfo->image,
-    ]);
+    // تحديث بيانات السجل
+    $personalInfo->name         = $validated['fullName'];
+    $personalInfo->job_title    = $validated['jobTitle'];
+    $personalInfo->email        = $validated['email'];
+    $personalInfo->phone_number = $validated['phoneNumber'];
+    $personalInfo->address      = $validated['address'];
+    $personalInfo->city         = $validated['city'];
+    $personalInfo->country      = $validated['country'];
+    $personalInfo->age          = $validated['age'];
+    $personalInfo->birthdate    = $validated['birthDate'];
+    $personalInfo->about_me     = $validated['aboutMe'];
+    $personalInfo->x_url        = $validated['x'];
+    $personalInfo->github_url   = $validated['github'];
+    $personalInfo->linkedin     = $validated['linkedin'];
 
-    // إذا تم إرسال ملف السيرة الذاتية (CV)، قم بتخزينه
+    // حفظ التحديثات
+    $personalInfo->save();
+
+    // إذا تم إرسال ملف السيرة الذاتية (CV)، قم بتخزينه وتحديث المسار
     if ($request->hasFile('cv')) {
-        $cvPath = $request->file('cv')->store('cv_files'); // هنا نضع المسار الذي نريد تخزين الملف فيه
-        $personalInfo->update(['cv' => $cvPath]);
+        $cvPath = $request->file('cv')->store('cv_files');
+        $personalInfo->cv = $cvPath;
+        $personalInfo->save();
     }
 
-    return back()->with('success', 'تم تحديث البيانات بنجاح.');
+    return back()->with('success', 'Data updated successfully.');
 }
-
-
-
-
 
 }

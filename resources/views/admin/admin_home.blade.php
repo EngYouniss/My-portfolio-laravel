@@ -19,8 +19,7 @@
                             <span class="d-none d-md-inline">System Admin</span>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a>
-                            </li>
+
                             <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -151,7 +150,7 @@
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h6 class="mb-1 mb-sm-0">New message from {{ $message->name }}</h6>
                                                     <small
-                                                        class="text-muted">{{ $message->created_at->format('Y-m-d H:i') }}</small>
+                                                        class="text-muted">{{ $message->created_at->format('d-M-Y H:i') }}</small>
                                                 </div>
                                                 <p class="small text-muted mb-0">{{Str::limit( $message->message, 50, '...') }}</p>
                                             </div>
@@ -266,12 +265,7 @@
                                         <input type="text" class="form-control"
                                             value="{{ $personalInfo->github_url }}" name="github">
                                     </div>
-                                    <div class="mb-3">
-                                        <label class="form-label"><i
-                                                class="fab fa-behance me-2 text-blue"></i>Behance</label>
-                                        <input type="text" class="form-control" value="https://behance.net/username"
-                                            name="behance">
-                                    </div>
+<br><br>
                                     <button class="btn btn-primary w-100">Save Changes</button>
                                 </div>
                             </div>
@@ -423,14 +417,14 @@
                                                                                 <select class="form-select"
                                                                                     id="skillPriority{{ $skill->id }}"
                                                                                     name="skillPriority">
-                                                                                    <option value="3"
-                                                                                        {{ $skill->skill_priority == 3 ? 'selected' : '' }}>
+                                                                                    <option value="منخفضة"
+                                                                                        {{ $skill->skill_priority == 'منخضة' ? 'selected' : '' }}>
                                                                                         High</option>
-                                                                                    <option value="2"
-                                                                                        {{ $skill->skill_priority == 2 ? 'selected' : '' }}>
+                                                                                    <option value="متوسطة"
+                                                                                        {{ $skill->skill_priority == 'متوسطة' ? 'selected' : '' }}>
                                                                                         Medium</option>
-                                                                                    <option value="1"
-                                                                                        {{ $skill->skill_priority == 1 ? 'selected' : '' }}>
+                                                                                    <option value="عالية"
+                                                                                        {{ $skill->skill_priority == 'عالية' ? 'selected' : '' }}>
                                                                                         Low</option>
                                                                                 </select>
                                                                             </div>
@@ -522,9 +516,9 @@
                                         <div class="mb-3">
                                             <label for="skillPriority" class="form-label">Priority</label>
                                             <select class="form-select" id="skillPriority" name="skillPriority">
-                                                <option value="3">High</option>
-                                                <option value="2">Medium</option>
-                                                <option value="1">Low</option>
+                                                <option value="عالية">High</option>
+                                                <option value="متوسطة">Medium</option>
+                                                <option value="منخفضة">Low</option>
                                             </select>
                                         </div>
                                         <div class="mb-3">

@@ -23,7 +23,7 @@ class MessagesController extends Controller
         $messageInfo->message = $request->message;
         if($messageInfo->save())
         {
-            
+
             return back()->with('success', 'Message sent successfully.');
         }
         else
@@ -46,5 +46,15 @@ class MessagesController extends Controller
 
 
 
+    }
+    public function delete($id)
+    {
+        $message = Messages::find($id);
+        if ($message) {
+            $message->delete();
+            return back()->with('success', 'Message deleted successfully.');
+        } else {
+            return back()->with('error', 'Message not found.');
+        }
     }
 }
