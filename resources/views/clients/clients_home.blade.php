@@ -219,12 +219,15 @@ See My CV</a>
                         </p>
 
                         <p class="mb-1" style="font-size: 1rem; text-align: left; padding-left: 10px;">
-                            <strong class="text-primary">Technologies:</strong>
-                            <span class="text-dark"
-                                style="font-size: 1rem; font-weight: 500; text-decoration: underline;">
-                                {{ $project->project_technics }}
-                            </span>
-                        </p>
+    <strong class="text-primary" style="display: inline-block; margin-bottom: 5px;">Technologies:</strong>
+    <span class="text-dark"
+      style="font-size: 1rem; font-weight: 500; text-decoration: underline; display: block;
+             word-break: break-word; overflow-wrap: break-word; white-space: normal; max-width: 100%;">
+    {{ $project->project_technics }}
+</span>
+
+</p>
+
 
                         <ul class="mb-3 ps-3" style="font-size: 0.9rem; text-align: left; padding-left: 10px;">
                             <li>

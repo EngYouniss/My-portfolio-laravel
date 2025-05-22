@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Storage;
 |
 */
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 
 Route::get('/', [ClientsHomeController::class, 'index'])->name('client.home');

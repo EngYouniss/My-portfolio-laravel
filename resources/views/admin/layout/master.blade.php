@@ -180,7 +180,7 @@
     </div>
 <footer class="text-center text-lg-start bg-light text-muted">
                 <div class="text-center p-3">
-                    <p>&copy; 2025 جميع الحقوق محفوظة.</p>
+<p>&copy; 2025 All rights reserved.</p>
                 </div>
             </footer>
     <script>
